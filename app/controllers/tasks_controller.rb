@@ -19,7 +19,7 @@ class TasksController < ApplicationController
 
   def update
     @task.update!(task_params)
-    render_notice(render_notice(t("successfully_updated")))
+    render_notice(t("successfully_updated"))
   end
 
   private
