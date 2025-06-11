@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  resources :tasks, except: %i[new edit destroy], param: :slug
+  resources :tasks, except: %i[new edit], param: :slug
 
   root "home#index"
   get "*path", to: "home#index", via: :all
