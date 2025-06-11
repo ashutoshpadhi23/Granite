@@ -5,7 +5,7 @@ import App from "../src/App";
 import { registerIntercepts, setAuthHeaders } from "apis/axios";
 import { initializeLogger } from "common/logger";
 
-registerIntercepts;
+registerIntercepts();
 initializeLogger();
 setAuthHeaders();
 
