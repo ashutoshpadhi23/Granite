@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  include Pundit::Authorization
+  rescue_from Pundit::NotAuthorizedError, with: :handle_authorization_error
   before_action :authenticate_user_using_x_auth_token
   protect_from_forgery
 
@@ -80,9 +82,6 @@ class ApplicationController < ActionController::Base
   def current_user
     @current_user
   end
-
-  include Pundit::Authorization
-  rescue_from Pundit::NotAuthorizedError, with: :handle_authorization_error
 
   private
 
