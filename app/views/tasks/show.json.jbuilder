@@ -7,7 +7,7 @@ json.task do
     :title
 
   json.assigned_user do
-    son.extract! @task.assigned_user,
+    json.extract! @task.assigned_user,
       :id,
       :name
   end
