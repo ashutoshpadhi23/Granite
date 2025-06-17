@@ -80,4 +80,13 @@ class ApplicationController < ActionController::Base
   def current_user
     @current_user
   end
+
+  include Pundit::Authorization
+  rescue_from Pundit::NotAuthorizedError, with: :handle_authorization_error
+
+  private
+
+    def handle_authorization_error
+      render_error(t("authorization.denied"), :forbidden)
+    end
 end
