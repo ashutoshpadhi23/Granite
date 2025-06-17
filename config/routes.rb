@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   constraints(lambda { |req| req.format == :json }) do
     resources :tasks, except: %i[new edit], param: :slug
     resources :users, only: %i[index create]
-    resources :sessions, only: :create
+    resource :session, only: :create
   end
 
   root "home#index"
