@@ -45,9 +45,15 @@ group :development, :test do
   gem "debug", platforms: %i[ mri windows ]
   gem "rubocop", require: false
   gem "rubocop-rails", require: false
+  # Rails integration for factory_bot, a replacement for fixtures
+  gem "factory_bot_rails"
+
+  # For auto-generating demo data
+  gem "faker"
 end
 
 group :development do
+
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
 
@@ -57,6 +63,7 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
   gem "erb_lint", require: false, git: "https://github.com/Shopify/erb-lint.git", branch: "main"
+
 end
 
 group :test do
