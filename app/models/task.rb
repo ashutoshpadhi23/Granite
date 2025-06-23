@@ -8,6 +8,8 @@ class Task < ApplicationRecord
   enum :status, { unstarred: "unstarred", starred: "starred" }, default: :unstarred
   enum :progress, { pending: "pending", completed: "completed" }, default: :pending
   has_many :comments, dependent: :destroy
+
+  belongs_to :task, counter_cache: true
   belongs_to :task_owner, foreign_key: "task_owner_id", class_name: "User"
   belongs_to :assigned_user, foreign_key: "assigned_user_id", class_name: "User"
   validates :title, presence: true, length: { maximum: MAXIMUM_TITLE_LENGTH }, format: { with: VALID_TITLE_REGEX }
