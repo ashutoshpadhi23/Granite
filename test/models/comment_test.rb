@@ -3,9 +3,6 @@
 require "test_helper"
 
 class CommentTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
   def setup
     @comment = build(:comment)
   end
@@ -22,7 +19,7 @@ class CommentTest < ActiveSupport::TestCase
 
   def test_valid_comment_should_be_saved
     assert_difference "Comment.count" do
-      @comment.save
+      @comment.save!
     end
   end
 
