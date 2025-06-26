@@ -15,6 +15,7 @@ class Task < ApplicationRecord
   validate :slug_not_changed
 
   before_create :set_slug
+  after_create :log_task_details
 
   def self.of_status(progress)
     if progress == :pending
@@ -55,5 +56,9 @@ class Task < ApplicationRecord
       if will_save_change_to_slug? && self.persisted?
         errors.add(:slug, I18n.t("task.slug.immutable"))
       end
+    end
+
+    def log_task_details
+      TaskLoggerJob.perform_async(self.id)
     end
 end
