@@ -3,6 +3,9 @@
 require_relative "boot"
 
 require "rails/all"
+# require "dotenv/rails-now"
+
+# Load dotenv file
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -25,6 +28,7 @@ module Granite
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    Dotenv::Railtie.load
     config.generators do |g|
       g.test_framework :test_unit, fixture: false
     end

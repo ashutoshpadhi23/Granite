@@ -29,6 +29,7 @@ class User < ApplicationRecord
   before_create :build_default_preference
   has_secure_password
   has_secure_token :authentication_token
+  has_one_attached :report
 
   private
 

@@ -1,15 +1,19 @@
 # frozen_string_literal: true
 
 class Task < ApplicationRecord
+  scope :accessible_to, ->(user_id) { where("task_owner_id = ? OR assigned_user_id = ?", user_id, user_id) }
+
   MAXIMUM_TITLE_LENGTH = 125
   VALID_TITLE_REGEX = /\A.*[a-zA-Z0-9].*\z/i
   RESTRICTED_ATTRIBUTES = %i[title task_owner_id assigned_user_id]
+
   enum :progress, { pending: "pending", completed: "completed" }, default: :pending
   enum :status, { unstarred: "unstarred", starred: "starred" }, default: :unstarred
   has_many :comments, dependent: :destroy
 
   belongs_to :task_owner, foreign_key: "task_owner_id", class_name: "User"
   belongs_to :assigned_user, foreign_key: "assigned_user_id", class_name: "User"
+
   validates :title, presence: true, length: { maximum: MAXIMUM_TITLE_LENGTH }, format: { with: VALID_TITLE_REGEX }
   validates :slug, uniqueness: true
   validate :slug_not_changed
